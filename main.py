@@ -20,9 +20,20 @@ while True:
 
     n = input()
 
+
     if not check_input(n):
         print("хуню ввел")
         continue
+
+    num_rand = random() % 10 + 1
+
+    # Проверка везения
+    if num_rand == int(n):
+        print("Угадал!")
+    else:
+        print("НЕ УГАДАЛ!!!!!!")
+        print(f"Загаданное число ---> {num_rand} Твое число ---> {n}")
+
 
 
 
