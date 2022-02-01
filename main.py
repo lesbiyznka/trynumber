@@ -1,10 +1,15 @@
 import time
 x = int(time.time())
 
+
 # Проверка ввода пользователя
 def check_input(user_input):
-    if 1 <= int(user_input) <= 10:
-        return True
+    # Обработка исключения
+    try:
+        if 1 <= int(user_input) <= 10:
+            return True
+    except ValueError:
+        return False
     return False
 
 
@@ -16,10 +21,13 @@ def random(a=6364136223846793005, c=1442695040888963407, m=2 ** 64):
 
 # Основной игровой цикл
 while True:
-    print("Если угадай число от 1 до 10")
 
+    print("Если угадай число от 1 до 10, для выхода напиши exit\n>>>", end='')
     n = input()
 
+    # Выход из игры
+    if n == "exit":
+        break
 
     if not check_input(n):
         print("хуню ввел")
@@ -31,8 +39,8 @@ while True:
     if num_rand == int(n):
         print("Угадал!")
     else:
-        print("НЕ УГАДАЛ!!!!!!")
-        print(f"Загаданное число ---> {num_rand} Твое число ---> {n}")
+        print(f"НЕ УГАДАЛ!!!!!!\nЗагаданное число ---> {num_rand} Твое число ---> {n}")
+
 
 
 
