@@ -19,28 +19,33 @@ def random(a=6364136223846793005, c=1442695040888963407, m=2 ** 64):
     x = (a * x + c) % m
     return x
 
-# Основной игровой цикл
-while True:
 
-    print("Если угадай число от 1 до 10, для выхода напиши exit\n>>>", end='')
-    n = input()
+# Игра "угадай число"
+def try_number():
+    while True:
+        print("Если угадай число от 1 до 10, для выхода напиши exit\n>>>", end='')
+        n = input()
 
-    # Выход из игры
-    if n == "exit":
-        break
+        # Выход из игры
+        if n == "exit":
+            break
 
-    if not check_input(n):
-        print("хуню ввел")
-        continue
+        if not check_input(n):
+            print("хуню ввел")
+            continue
 
-    num_rand = random() % 10 + 1
+        num_rand = random() % 10 + 1
 
-    # Проверка везения
-    if num_rand == int(n):
-        print("Угадал!")
-    else:
-        print(f"НЕ УГАДАЛ!!!!!!\nЗагаданное число ---> {num_rand} Твое число ---> {n}")
+        # Проверка везения
+        if num_rand == int(n):
+            print("Угадал!")
+        else:
+            print(f"НЕ УГАДАЛ!!!!!!\nЗагаданное число ---> {num_rand} Твое число ---> {n}")
 
+
+# Основной цикл игровой программы
+if __name__ == "__main__":
+    try_number()
 
 
 
