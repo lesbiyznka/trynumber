@@ -1,27 +1,46 @@
-word = "бебра"
-
-# Количество букв
-quant = len(word)
+from engine import *
 
 
-# Проверка ввода пользователя
-def check_input(user_input):
-    if user_input == "да":
-        return True
-    else:
-        return False
-    return False
+# Получение слова
+def get_word():
+    num_lines = sum(1 for line in open('gibbet.txt'))
+    num = random() % num_lines
+    txt = open('gibbet.txt', 'r', encoding="utf-8")
+
+    i=0
+    for line in txt:
+        if i == num:
+            txt.close()
+            return line
+        i+=1
+
 
 # Основной игровой цикл
-while True:
-    print(f"Хочешь сыграть в виселицу? Если хочешь пиши да\n>>>", end='')
-    n = input()
+def gibbet():
+    word = get_word()
+
+    # Количество букв
+    count = len(word)
+    print(f"В слове всего {count} букв, попробуй угадать")
+
+    attempts = 12
+
+    while attempts > 0:
+        # Вывод угаданной буквы
+        for symbol in word:
+            if symbol.isupper():
+                print(symbol, end='')
+            else:
+                print('-', end='')
+
+        inp = input("Введите букву\n>>>")
+        char = word.find(inp)
+        if char == -1:
+            attempts -= 1
+        else:
+            # Заглавная буква по индексу
+            word = word[:char] + word[char].upper() + word[char+1:]
+            print("Вы угадали букву!")
 
 
-    if not check_input(n):
-        print("Попробуй еще")
-        continue
 
-    if check_input(n):
-        print(f"В слове всего {quant} букв, попробуй угадать)\n>>>", end='')
-        inp = input()
